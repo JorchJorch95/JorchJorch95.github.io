@@ -4,7 +4,7 @@ var circle = new THREE.Mesh( cap, material );
 
 
 
-var forma = new THREE.ExtrudeGeometry( cap,{amount: 10} );
+var forma = new THREE.ExtrudeGeometry( circle,{amount: 10} );
 
 var malla = new THREE.Mesh( forma, material );
 malla.rotateY( Math.PI/4 );
