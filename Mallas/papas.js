@@ -9,8 +9,8 @@ papas.vertices.push( new THREE.Vector3(  1,5,10) ); // Vértice 6
 papas.vertices.push( new THREE.Vector3( 1,1,10 ) ); // Vértice 7
 
 
-papas.faces.push( new THREE.Face3( 3, 0, 1 ) ); // Cara 0
-papas.faces.push( new THREE.Face3( 3, 1, 2 ) ); // Cara 1
+papas.faces.push( new THREE.Face3( 3, 1, 0 ) ); // Cara 0
+papas.faces.push( new THREE.Face3( 3, 2, 1 ) ); // Cara 1
 papas.faces.push( new THREE.Face3( 4, 1, 2 ) ); // Cara 2
 papas.faces.push( new THREE.Face3( 4, 2, 5 ) ); // Cara 3
 papas.faces.push( new THREE.Face3( 3, 6, 2 ) ); // Cara 4
@@ -34,7 +34,7 @@ var escena = new THREE.Scene();
 escena.add( malla );
 
 var camara = new THREE.PerspectiveCamera();
-camara.position.z = 100;
+camara.position.z = 70;
 
 var renderizador = new THREE.WebGLRenderer();
 renderizador.setSize( window.innerHeight*.95, 
