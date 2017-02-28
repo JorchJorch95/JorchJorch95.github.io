@@ -11,11 +11,11 @@ papas.vertices.push( new THREE.Vector3( 1,1,10 ) ); // Vértice 7
 
 papas.faces.push( new THREE.Face3( 3, 0, 1 ) ); // Cara 0
 papas.faces.push( new THREE.Face3( 3, 1, 2 ) ); // Cara 1
-papas.faces.push( new THREE.Face3( 1, 4, 2 ) ); // Cara 2
-papas.faces.push( new THREE.Face3( 4, 5, 2 ) ); // Cara 3
-papas.faces.push( new THREE.Face3( 6, 3, 2 ) ); // Cara 4
+papas.faces.push( new THREE.Face3( 4, 1, 2 ) ); // Cara 2
+papas.faces.push( new THREE.Face3( 4, 2, 5 ) ); // Cara 3
+papas.faces.push( new THREE.Face3( 3, 6, 2 ) ); // Cara 4
 papas.faces.push( new THREE.Face3( 6, 5, 2 ) ); // Cara 5
-papas.faces.push( new THREE.Face3( 6,7,3 ) ); // Cara 6
+papas.faces.push( new THREE.Face3( 7,6,3 ) ); // Cara 6
 papas.faces.push( new THREE.Face3(  7,3,0) ); // Cara 7
 papas.faces.push( new THREE.Face3(  7,0,1) ); // Cara 8
 papas.faces.push( new THREE.Face3(  7,1,4) ); // Cara 9
