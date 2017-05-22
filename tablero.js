@@ -70,7 +70,7 @@ texloader.load('https://JorchJorch95.github.io/crate.gif');
 
 
 
-var matel = new THREE.MeshBasicMaterial( {map: tex} );
+var matel = new THREE.MeshBasicMaterial( {map: texloader} );
 
 var piso = new THREE.BoxGeometry(7,0.5,7);
 
