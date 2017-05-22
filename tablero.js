@@ -26,7 +26,7 @@ camara.position.x=20;
 camara.position.y=10;
 
 
-
+ 
 
 
 var LataForma = new THREE.CylinderGeometry(1, 1, 2);
