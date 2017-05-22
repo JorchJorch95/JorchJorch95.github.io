@@ -65,7 +65,7 @@ var escena= new THREE.Scene();
 
 
 var textura = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/crate.gif');
-var matel = new THREE.MeshBasicMaterial( {map: textura} );
+var matel = new THREE.MeshBasicMaterial( {map: textura, side:THREE.DoubleSide      } );
 
 var piso = new THREE.BoxGeometry(7,0.5,7);
 
