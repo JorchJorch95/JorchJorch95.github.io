@@ -59,13 +59,22 @@ var material = new THREE.MeshNormalMaterial();
 var LataMalla = new THREE.Mesh(LataFForma, material);
 
 
+
+
 var escena= new THREE.Scene();
+
+
+var textura = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/crate.gif');
+var matel = new THREE.MeshBasicMaterial( {map: textura} );
+
+var piso = new THREE.BoxGeometry(7,0.5,7);
+
 
 for (i=0;i<50;i=i+7)
 {
 	for(j=0;j<70;j=j+7)
 	{
-	mesh = new THREE.Mesh(new THREE.BoxGeometry(7,0.5,7));
+	mesh = new THREE.Mesh(piso,matel);
 	mesh.position.x=i;
 	mesh.position.z=j;	
 	//mesh.rotateX(Math.PI/6);
