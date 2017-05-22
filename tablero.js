@@ -64,7 +64,7 @@ var LataMalla = new THREE.Mesh(LataFForma, material);
 var escena= new THREE.Scene();
 
 
-var textura = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/crate.gif');
+var textura = new THREE.TextureLoader('https://JorchJorch95.github.io/crate.gif');
 var matel = new THREE.MeshBasicMaterial( {map: textura    } );
 
 var piso = new THREE.BoxGeometry(7,0.5,7);
