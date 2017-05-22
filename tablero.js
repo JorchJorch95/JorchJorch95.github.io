@@ -64,7 +64,7 @@ var LataMalla = new THREE.Mesh(LataFForma, material);
 var escena= new THREE.Scene();
 
 var texloader = new THREE.TextureLoader();
-textureLoader.load('https://JorchJorch95.github.io/crate.gif');
+texloader.load('https://JorchJorch95.github.io/crate.gif');
 
 
 
