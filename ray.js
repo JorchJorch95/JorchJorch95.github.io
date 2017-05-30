@@ -2,8 +2,8 @@ function setup(){
   cubo1=new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshNormalMaterial());
   cubo2=new THREE.Mesh(new THREE.BoxGeometry(1,1,1), new THREE.MeshNormalMaterial());
   pelota=new THREE.Mesh(new THREE.SphereGeometry(0.5), new THREE.MeshNormalMaterial());
-  cubo1.position.x=5;
-  cubo2.position.x=-5;
+  cubo1.position.x=7;
+  cubo2.position.x=-7;
   
   camara=new THREE.PerspectiveCamera();
   camara.position.z=20;
@@ -22,8 +22,10 @@ function setup(){
   renderer.setSize(window.innerHeight*0.95,window.innerHeight*0.95);
   
   document.body.appendChild(renderer.domElement);
-  step=1;
+  step=0.01;
 }
+
+
 function loop(){
   obstaculo1 = raycaster1.intersectObject(cubo1);
   obstaculo2 = raycaster2.intersectObject(cubo2);
