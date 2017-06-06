@@ -31,7 +31,7 @@ function Environment() {
       
       
   Environment.prototype.plan = function() {
-    for (var i=0; i < this.children.length; i++)
+    for (var i=0; i < this.children.length; i++){
     if (this.children[i].plan !== undefined
       this.children[i].plan(this);
     }
