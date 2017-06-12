@@ -1,8 +1,6 @@
 var textura = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/crate.gif');
 
-
-
-var TECLA = { AVPAG:false, REPAG:false, ARRIBA:false, ABAJO:false, IZQUIERDA:false, DERECHA:false, F:false, K:false,I:false,L:false,J:false, Q:false,A:false,W:false,S:false,E:false,D:false,Z:false,X:false,T1:false,T2:false,T3:false,T4:false };
+var TECLA = { AVPAG:false, REPAG:false, ARRIBA:false, ABAJO:false, IZQUIERDA:false, DERECHA:false, F:false, K:false,I:false,L:false,J:false, Q:false,A:false,W:false,S:false,E:false,D:false,Z:false,X:false,T1:false,T2:false,T3:false,T4:false,C:false,V:false };
 			var escena;
 			var camara;
 			var render;
@@ -12,10 +10,19 @@ var TECLA = { AVPAG:false, REPAG:false, ARRIBA:false, ABAJO:false, IZQUIERDA:fal
 			var ultimoTiempo;
 			var star;
 			var esfera;
+			var esfera2;
+			var esffinal,esffinal2;
+			var raycaster1,raycaster2,raycaster3,raycaster4;	
+			var step,step2;
+			var obstaculo1,obstaculo2,obstaculo3,obstaculo4;
 
 			var filtroActivo=0;
+			var alturacubo=100;
+			var rx=0;
 
 			var log;
+
+			var offset2 = 250; 
 
 //function degToRad(degrees) {
 //				return degrees * Math.PI / 180;
@@ -40,16 +47,37 @@ var tcubo = 20;
 
 var map = [ // 1  2  3  4  5  6  7  8  9
            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,], // 0
-           [1, 0, 0, 0, 0, 0, 0, 0, 0, 1,], // 1
-           [1, 0, 0, 0, 0, 0, 0, 0, 0, 1,], // 2
-           [1, 0, 0, 0, 0, 0, 0, 0, 0, 1,], // 3
-           [1, 0, 0, 0, 0, 0, 0, 0, 0, 1,], // 4
-           [1, 0, 0, 0, 0, 0, 0, 0, 0, 1,], // 5
-           [1, 0, 0, 0, 0, 0, 0, 1, 0, 1,], // 6
-           [1, 0, 0, 0, 0, 1, 0, 0, 1, 1,], // 7
-           [1, 0, 0, 0, 0, 0, 0, 0, 0, 1,], // 8
+           [1, 0, 0, 0, 0, 0, 1, 0, 0, 0,], // 1
+           [1, 0, 1, 1, 1, 0, 1, 1, 0, 1,], // 2
+           [1, 0, 0, 0, 1, 1, 0, 0, 0, 1,], // 3
+           [1, 0, 1, 0, 1, 0, 0, 1, 0, 1,], // 4
+           [1, 1, 0, 0, 1, 1, 0, 1, 0, 1,], // 5
+           [1, 0, 0, 1, 0, 0, 0, 1, 0, 1,], // 6
+           [1, 0, 1, 0, 0, 1, 1, 0, 0, 1,], // 7
+           [1, 0, 0, 0, 0, 0, 1, 0, 0, 1,], // 8
            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,], // 9
            ], mapW = map.length, mapH = map[0].length;
+
+
+
+
+// M  A P A  2
+
+var map2 = [ // 1  2  3  4  5  6  7  8  9 
+           [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,], // 0
+           [1, 0, 0, 0, 1, 0, 1, 0, 0, 1,], // 1
+           [1, 0, 1, 0, 0, 0, 1, 1, 0, 1,], // 2
+           [1, 0, 0, 1, 0, 1, 0, 0, 0, 1,], // 3
+           [1, 1, 1, 0, 0, 0, 0, 1, 1, 1,], // 4
+           [1, 0, 0, 0, 0, 1, 0, 1, 0, 0,], // 5
+           [1, 0, 0, 1, 0, 0, 0, 1, 0, 1,], // 6
+           [1, 0, 1, 0, 1, 1, 0, 0, 0, 1,], // 7
+           [1, 0, 0, 0, 1, 0, 1, 0, 0, 1,], // 8
+           [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,], // 9
+           ];
+
+
+
 
 
 
@@ -96,14 +124,30 @@ escena.add( spotLight );
 
 
 
+//L U Z     M A P A 2
+var spotLight2 = new THREE.SpotLight( 0xffffff );
+spotLight2.position.set( 400, 300, 300 );
+//default; light shining from top
+spotLight2.castShadow = true;
+
+spotLight2.shadow.mapSize.width = 2000;
+spotLight2.shadow.mapSize.height = 2000;
+
+spotLight2.shadow.camera.near = 0.1;
+spotLight2.shadow.camera.far = 5000;
+spotLight2.shadow.camera.fov = 75;
+
+escena.add( spotLight2 );
 
 
 
 
 
 
-var wallg = new THREE.CubeGeometry(tcubo,tcubo,tcubo);
-var wallmat = new THREE.MeshStandardMaterial( {map: textura});
+
+
+var wallg = new THREE.CubeGeometry(tcubo,tcubo,alturacubo);
+var wallmat = new THREE.MeshStandardMaterial( {color: 0xff00ff});
 
  
 
@@ -127,7 +171,23 @@ if ((map[i][j]) === 1) {
 
 
 
-
+for (var i = 0; i < 10; i++) {
+		for (var j = 0; j < 10; j++) {
+			
+if ((map2[i][j]) === 1) {
+				
+				var wall = new THREE.Mesh(wallg,wallmat);
+				wall.castShadow = true;
+				wall.receiveShadow = true;
+				wall.position.x = offset2+i*tcubo;
+				wall.position.y = j*tcubo;
+				wall.position.z = 5;
+				escena.add(wall);
+				
+			}
+			
+		}
+	}
 
 
 
@@ -160,7 +220,7 @@ axisHelper.position.set(-5,-5,5);
 
 				cubo = new THREE.Mesh(cuboGeometria, cuboMaterial);
 				cubo.castShadow = true;
-				cubo.position.set(40, 40, 10);
+				cubo.position.set(20, 170, 10);
 
 				cubo.velocidadX = 0;
 				cubo.velocidadY = 0;
@@ -233,7 +293,7 @@ var LataBB = new THREE.BoxHelper( Lata, 0xffff00 );
 escena.add(LataBB);
 
 Lata.boundingBox = LataBB;
-Lata.position.set(cubo.position.x,cubo.position.y,cubo.position.z+10);
+Lata.position.set(cubo.position.x,cubo.position.y,cubo.position.z);
 Lata.visible = true;
 LataBB.position.set(5,5,10);
 LataBB.visible = false;
@@ -261,6 +321,9 @@ esfera.position.set(-10, -5,5);
 escena.add(esfera);
 
 esfera.visible = false;
+
+
+
 
 
 
@@ -297,6 +360,33 @@ star.visible = false;
 
 
 
+// E S F E R A     F I N A L
+esffinal=new THREE.Mesh(new THREE.SphereGeometry(5), new THREE.MeshNormalMaterial());
+escena.add(esffinal);
+esffinal.position.set(20,180,10);
+
+
+
+step=0;
+ raycaster1 = new THREE.Raycaster(esffinal.position, new THREE.Vector3(1,0,0));
+  raycaster2 = new THREE.Raycaster(esffinal.position, new THREE.Vector3(-1,0,0));
+
+
+
+
+
+
+
+// E S F E R A     F I N A L   N I V E L   2
+esffinal2=new THREE.Mesh(new THREE.SphereGeometry(5), new THREE.MeshNormalMaterial());
+escena.add(esffinal2);
+esffinal2.position.set(offset2+100,180,10);
+
+
+
+step2=0;
+ raycaster3 = new THREE.Raycaster(esffinal2.position, new THREE.Vector3(1,0,0));
+  raycaster4 = new THREE.Raycaster(esffinal2.position, new THREE.Vector3(-1,0,0));
 
 
 
@@ -318,41 +408,102 @@ star.visible = false;
 
 
 
+
+
+//PISO 2
+	var piso2g = new THREE.BoxBufferGeometry(200,200,1);
+	var materialpiso2 = new THREE.MeshStandardMaterial( {color: 0x0000ff} );
+	var P2 = new THREE.Mesh( piso2g, materialpiso2 );
+	escena.add( P2 );
+	P2.position.z=0;
+	P2.position.x=offset2+100;
+	P2.position.y=100;
+	P2.receiveShadow = true;
+	
+
+
+
+
+
+
 //Camara
-				camara = new THREE.PerspectiveCamera(90, canvasWidth / canvasHeight, 0.1, 10000);
-				camara.position.set(0,-900,100);
-				//camara.rotate.x=Math.PI/6;
-				camara.lookAt(new THREE.Vector3(0,0,0) );
-				escena.add(camara);
+				camara = new THREE.PerspectiveCamera(75, canvasWidth / canvasHeight, 0.1, 10000);
+				camara.position.set(0,0,100);
 				
+				escena.add(camara);
 }
 
 
 
 function updateRenderWorld(){
-//camara.position.x= Math.sin(cubo.rotation.x);
-camara.position.x=cubo.position.x;
-camara.position.y=cubo.position.y-14;
-camara.position.z=cubo.position.z+6;
 
+
+// R A Y C A S T E R 1
+
+obstaculo1 = raycaster1.intersectObject(cubo);
+obstaculo2 = raycaster2.intersectObject(cubo);
+  if ((obstaculo1.length>0 && (obstaculo1[0].distance<=1))||(obstaculo2.length>0 && (obstaculo2[0].distance<=1)))
+  {step=5;}
+
+raycaster1.set(esffinal.position, new THREE.Vector3(0,1,0));
+  raycaster2.set(esffinal.position, new THREE.Vector3(0,-1,0));
+
+
+//RAYCASTER NIVEL 2
+
+obstaculo3 = raycaster3.intersectObject(cubo);
+obstaculo4 = raycaster4.intersectObject(cubo);
+  if ((obstaculo3.length>0 && (obstaculo3[0].distance<=1))||(obstaculo4.length>0 && (obstaculo4[0].distance<=1)))
+  {step2=5;}
+
+raycaster3.set(esffinal2.position, new THREE.Vector3(0,1,0));
+  raycaster4.set(esffinal2.position, new THREE.Vector3(0,-1,0));
+
+
+
+
+camara.position.x=cubo.position.x+zoomx;
+camara.position.y=cubo.position.y+zoomy;
+camara.position.z=cubo.position.z+30+zoomz;
 
 Lata.position.x=cubo.position.x;
 Lata.position.y=cubo.position.y;
-Lata.position.z=cubo.position.z+2;
-
-//cubo.position.set(camara.position.x,camara.position.y,camara.position.z);
+Lata.position.z=cubo.position.z+10;
+Lata.rotation.y=cubo.rotation.z;
 
 star.position.x=cubo.position.x;
 star.position.y=cubo.position.y;
 star.position.z=cubo.position.z;
+
 esfera.position.x=cubo.position.x;
 esfera.position.y=cubo.position.y;
 esfera.position.z=cubo.position.z;
+
+esffinal.position.y += step;
+
+esffinal2.position.y += step2;
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function renderEscena(){
 				updateRenderWorld();
+				
 				render.render(escena, camara);
 }
 
@@ -368,16 +519,8 @@ function renderEscena(){
     				if (TECLA.DERECHA) cubo.velocidadY+=2*delta;
 				if (TECLA.K) cubo.position.y-=1;
 				if (TECLA.I) cubo.position.y+=1;
-
-				//if(TECLA.L) { // w
-				//camara.rotation.y += 0.1;
-				//}
-				//if(TECLA.J){ // s
-				//camara.rotation.y -= 0.1;
-				//}
 				if (TECLA.L) cubo.position.x+=1;
 				if (TECLA.J) cubo.position.x-=1;
-
     				if (TECLA.REPAG) cubo.position.z-=velcubo*delta;
     				if (TECLA.AVPAG) cubo.position.z+=velcubo*delta;
 				if (TECLA.T){
@@ -388,26 +531,33 @@ function renderEscena(){
 				}//PARO GENERAL
 
 
+
 				//MOVER CÁMARA
 				if (TECLA.Q)	zoomx+=2*delta;
 				if (TECLA.A)	zoomx-=2*delta;
 				if (TECLA.W)	zoomy+=2*delta;
 				if (TECLA.S)	zoomy-=2*delta;
-				if (TECLA.E)	zoomz+=2*delta;
-				if (TECLA.D)	zoomz-=2*delta;
+				if (TECLA.E)	zoomz+=30*delta;
+				if (TECLA.D)	zoomz-=30*delta;
 
 
-				//ROTAR CUBO Y CÁMARA    				
+				//ROTAR CUBO  				
 				if(TECLA.Z)	cubo.rotation.z += 2*delta;
 				if(TECLA.X)	cubo.rotation.z -= 2*delta;
 
 
 
     				cubo.rotation.x += cubo.velocidadX * delta;
-            		cubo.rotation.y += cubo.velocidadY * delta;
+            			cubo.rotation.y += cubo.velocidadY * delta;
 
-
+				//ROTAR CÁMARA
+				if (TECLA.C)	rx+=1*delta;
+				if (TECLA.V) 	rx-=1*delta;
 				
+
+
+				camara.rotation.x = rx;				
+
 				//CAMBIAR PERSONAJES
 				if (TECLA.T1)	 {Lata.visible = true; cubo.visible = false; esfera.visible = false; star.visible = false;} 
 				if (TECLA.T2)	 {Lata.visible = false; cubo.visible = true; esfera.visible = false; star.visible = false;} 
@@ -425,6 +575,8 @@ function renderEscena(){
 
 
 // R E S T R I C C I O N E S
+
+//N I V E L 1
 for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 10; j++) {
 			
@@ -445,6 +597,38 @@ if ((map[i][j]) === 1) {
 		}
 	}
 
+
+//N I V E L    2
+for (var i = 0; i < 10; i++) {
+		for (var j = 0; j < 10; j++) {
+			
+if ((map2[i][j]) === 1) {
+				
+
+				if ( (cubo.position.x === offset2+i*tcubo - 12) && (cubo.position.y < j*tcubo+11 && cubo.position.y > j*tcubo-11) ) {cubo.position.x = offset2+i*tcubo - 13}
+				if ( (cubo.position.x === offset2+i*tcubo + 12) && (cubo.position.y < j*tcubo+11 && cubo.position.y > j*tcubo-11) ) {cubo.position.x = offset2+i*tcubo + 13}
+
+
+				if ( (cubo.position.y === j*tcubo - 12) && (cubo.position.x  < offset2+i*tcubo+11 && cubo.position.x >offset2+ i*tcubo-11) ) {cubo.position.y = j*tcubo - 13}
+				if ( (cubo.position.y === j*tcubo + 12) && (cubo.position.x  < offset2+i*tcubo+11 && cubo.position.x >offset2+ i*tcubo-11) ) {cubo.position.y = j*tcubo + 13}
+
+				
+				
+			}
+			
+		}
+	}
+
+
+
+
+
+
+
+// A P A R I C I O N E S 
+
+//NIVEL 1
+	if ( (cubo.position.x > 10) && (cubo.position.x < 30) && (cubo.position.y > 190) ) {cubo.position.x = 300; cubo.position.y=20;}
 
 
 
@@ -489,14 +673,6 @@ function teclaPulsada(e)
 					case 74: // J
 						TECLA.J=true;
 						break;
-					case 85: // L
-						TECLA.U=true;
-						break;
-
-					case 79: // J
-						TECLA.O=true;
-						break;
-
 
 					case 73: // I
 						TECLA.I=true;
@@ -552,6 +728,16 @@ function teclaPulsada(e)
 					case 52: //NÚMERO 4
 						TECLA.T4=true;
 						break;
+
+					case 67: //TECLA C
+						TECLA.C=true;
+						break;
+
+					case 86: //TECLA V
+						TECLA.V=true;
+						break;
+
+
 				}
 
 }
@@ -623,13 +809,7 @@ function teclaPulsada(e)
 					case 68: // D
 						TECLA.D=false;
 						break;
-					case 85: // L
-						TECLA.U=false;
-						break;
 
-					case 79: // J
-						TECLA.O=false;
-						break;
 
 					
 					case 90: // Z
@@ -655,6 +835,16 @@ function teclaPulsada(e)
 					case 52: //NÚMERO 4
 						TECLA.T4=false;
 						break;
+
+
+
+					case 67: //TECLA C
+						TECLA.C=false;
+						break;
+
+					case 86: //TECLA V
+						TECLA.V=false;
+						break;
 				
 				}
 }
@@ -670,6 +860,7 @@ function teclaPulsada(e)
 				document.onkeydown=teclaPulsada;
 				document.onkeyup=teclaSoltada;
 				
+				
 				animarEscena();
 				
-			}	
+			}		
