@@ -519,6 +519,20 @@ step3=0;
 	P3.receiveShadow = true;
 	
 
+	
+	
+	//ANUNCIO UPIITA
+	var piso4g = new THREE.BoxBufferGeometry(800,200,1);
+	var materialpiso4 = new THREE.MeshStandardMaterial( {map:logoupiita} );
+	var P4 = new THREE.Mesh( piso4g, materialpiso4 );
+	escena.add( P4 );
+	P4.position.z=200;
+
+	P4.receiveShadow = true;
+
+	
+	
+	
 
 
 
