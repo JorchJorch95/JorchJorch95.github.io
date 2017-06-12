@@ -1,4 +1,8 @@
-var textura = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/crate.gif');
+var textura1 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/brick_bump.jpg');
+var textura2 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/brick_diffuse.jpg');
+var textura3 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/brick_roughness.jpg');
+
+
 
 var TECLA = { AVPAG:false, REPAG:false, ARRIBA:false, ABAJO:false, IZQUIERDA:false, DERECHA:false, F:false, K:false,I:false,L:false,J:false, Q:false,A:false,W:false,S:false,E:false,D:false,Z:false,X:false,T1:false,T2:false,T3:false,T4:false,C:false,V:false };
 			var escena;
@@ -6,27 +10,24 @@ var TECLA = { AVPAG:false, REPAG:false, ARRIBA:false, ABAJO:false, IZQUIERDA:fal
 			var render;
 			var cubo;
 			var Lata;
-			var cuboTextura;
+			
 			var ultimoTiempo;
 			var star;
 			var esfera;
 			var esfera2;
 			var esffinal,esffinal2;
-			var raycaster1,raycaster2,raycaster3,raycaster4;	
-			var step,step2;
-			var obstaculo1,obstaculo2,obstaculo3,obstaculo4;
+			var raycaster1,raycaster2,raycaster3,raycaster4,raycaster5,raycaster6;	
+			var step,step2,step3;
+			var obstaculo1,obstaculo2,obstaculo3,obstaculo4,obstaculo5,obstaculo6;
 
-			var filtroActivo=0;
 			var alturacubo=100;
 			var rx=0;
 
-			var log;
+			
 
 			var offset2 = 250; 
+			var offset3 = offset2 + 250;
 
-//function degToRad(degrees) {
-//				return degrees * Math.PI / 180;
-//			}
 
 
 
@@ -75,6 +76,24 @@ var map2 = [ // 1  2  3  4  5  6  7  8  9
            [1, 0, 0, 0, 1, 0, 1, 0, 0, 1,], // 8
            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,], // 9
            ];
+
+
+
+// M  A P A  3
+
+var map3 = [ // 1  2  3  4  5  6  7  8  9 
+           [1, 1, 1, 1, 1, 0, 1, 1, 1, 1,], // 0
+           [1, 0, 0, 0, 1, 0, 0, 0, 0, 1,], // 1
+           [1, 0, 1, 0, 1, 0, 1, 1, 0, 1,], // 2
+           [1, 0, 0, 0, 0, 1, 0, 0, 0, 1,], // 3
+           [1, 1, 1, 0, 0, 0, 0, 1, 0, 1,], // 4
+           [1, 0, 0, 0, 0, 1, 0, 1, 0, 1,], // 5
+           [1, 0, 0, 1, 0, 0, 0, 1, 0, 1,], // 6
+           [1, 0, 1, 0, 0, 0, 0, 0, 0, 1,], // 7
+           [1, 0, 0, 0, 1, 0, 1, 0, 0, 1,], // 8
+           [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,], // 9
+           ];
+
 
 
 
@@ -146,8 +165,36 @@ escena.add( spotLight2 );
 
 
 
+
+
+
+//L U Z     M A P A 3
+var spotLight3 = new THREE.SpotLight( 0xffffff );
+spotLight3.position.set( offset2+400+100, 200, 500 );
+//default; light shining from top
+spotLight3.castShadow = true;
+
+spotLight3.shadow.mapSize.width = 2000;
+spotLight3.shadow.mapSize.height = 2000;
+
+spotLight3.shadow.camera.near = 0.1;
+spotLight3.shadow.camera.far = 5000;
+spotLight3.shadow.camera.fov = 75;
+
+escena.add( spotLight3 );
+
+
+
+
+
+
+
+
+
+
+
 var wallg = new THREE.CubeGeometry(tcubo,tcubo,alturacubo);
-var wallmat = new THREE.MeshStandardMaterial( {color: 0xff00ff});
+var wallmat1 = new THREE.MeshStandardMaterial( {map: textura1});
 
  
 
@@ -156,7 +203,7 @@ for (var i = 0; i < 10; i++) {
 			
 if ((map[i][j]) === 1) {
 				
-				var wall = new THREE.Mesh(wallg,wallmat);
+				var wall = new THREE.Mesh(wallg,wallmat1);
 				wall.castShadow = true;
 				wall.receiveShadow = true;
 				wall.position.x = i*tcubo;
@@ -170,16 +217,47 @@ if ((map[i][j]) === 1) {
 	}
 
 
-
+// D I B U J A R    M A P A  2 
+	
+	
+	var wallmat2 = new THREE.MeshStandardMaterial( {map: textura2});
+	
 for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 10; j++) {
 			
 if ((map2[i][j]) === 1) {
 				
-				var wall = new THREE.Mesh(wallg,wallmat);
+				var wall = new THREE.Mesh(wallg,wallmat2);
 				wall.castShadow = true;
 				wall.receiveShadow = true;
 				wall.position.x = offset2+i*tcubo;
+				wall.position.y = j*tcubo;
+				wall.position.z = 5;
+				escena.add(wall);
+				
+			}
+			
+		}
+	}
+
+
+
+
+
+
+
+
+// D I B U J A R    M A P A  3 
+	var wallmat3 = new THREE.MeshStandardMaterial( {map: textura3});
+for (var i = 0; i < 10; i++) {
+		for (var j = 0; j < 10; j++) {
+			
+if ((map3[i][j]) === 1) {
+				
+				var wall = new THREE.Mesh(wallg,wallmat3);
+				wall.castShadow = true;
+				wall.receiveShadow = true;
+				wall.position.x = offset3+i*tcubo;
 				wall.position.y = j*tcubo;
 				wall.position.z = 5;
 				escena.add(wall);
@@ -220,7 +298,7 @@ axisHelper.position.set(-5,-5,5);
 
 				cubo = new THREE.Mesh(cuboGeometria, cuboMaterial);
 				cubo.castShadow = true;
-				cubo.position.set(20, 170, 10);
+				cubo.position.set(20, 20, 10);
 
 				cubo.velocidadX = 0;
 				cubo.velocidadY = 0;
@@ -385,8 +463,29 @@ esffinal2.position.set(offset2+100,180,10);
 
 
 step2=0;
- raycaster3 = new THREE.Raycaster(esffinal2.position, new THREE.Vector3(1,0,0));
-  raycaster4 = new THREE.Raycaster(esffinal2.position, new THREE.Vector3(-1,0,0));
+ raycaster3 = new THREE.Raycaster(esffinal2.position, new THREE.Vector3(0,1,0));
+  raycaster4 = new THREE.Raycaster(esffinal2.position, new THREE.Vector3(0,-1,0));
+
+
+
+
+
+
+
+// E S F E R A     F I N A L   N I V E L   3
+esffinal3=new THREE.Mesh(new THREE.SphereGeometry(5), new THREE.MeshNormalMaterial());
+escena.add(esffinal3);
+esffinal3.position.set(offset3,100,10);
+
+
+
+step3=0;
+ raycaster5 = new THREE.Raycaster(esffinal3.position, new THREE.Vector3(1,0,0));
+  raycaster6 = new THREE.Raycaster(esffinal3.position, new THREE.Vector3(-1,0,0));
+
+
+
+
 
 
 
@@ -423,11 +522,24 @@ step2=0;
 
 
 
+//PISO 3
+	var piso3g = new THREE.BoxBufferGeometry(200,200,1);
+	var materialpiso3 = new THREE.MeshStandardMaterial( {color: 0x000099} );
+	var P3 = new THREE.Mesh( piso3g, materialpiso3 );
+	escena.add( P3 );
+	P3.position.z=0;
+	P3.position.x=offset3+100;
+	P3.position.y=100;
+	P3.receiveShadow = true;
+	
+
+
+
 
 
 
 //Camara
-				camara = new THREE.PerspectiveCamera(75, canvasWidth / canvasHeight, 0.1, 10000);
+				camara = new THREE.PerspectiveCamera(100, canvasWidth / canvasHeight, 0.1, 10000);
 				camara.position.set(0,0,100);
 				
 				escena.add(camara);
@@ -436,6 +548,10 @@ step2=0;
 
 
 function updateRenderWorld(){
+
+
+
+
 
 
 // R A Y C A S T E R 1
@@ -462,6 +578,25 @@ raycaster3.set(esffinal2.position, new THREE.Vector3(0,1,0));
 
 
 
+
+//RAYCASTER NIVEL 3
+
+obstaculo5 = raycaster5.intersectObject(cubo);
+obstaculo6 = raycaster6.intersectObject(cubo);
+  if ((obstaculo5.length>0 && (obstaculo5[0].distance<=1))||(obstaculo6.length>0 && (obstaculo6[0].distance<=1)))
+  {step3=5;}
+
+raycaster5.set(esffinal3.position, new THREE.Vector3(1,0,0));
+  raycaster6.set(esffinal3.position, new THREE.Vector3(-1,0,0));
+
+
+
+
+
+
+
+
+
 camara.position.x=cubo.position.x+zoomx;
 camara.position.y=cubo.position.y+zoomy;
 camara.position.z=cubo.position.z+30+zoomz;
@@ -483,6 +618,8 @@ esffinal.position.y += step;
 
 esffinal2.position.y += step2;
 
+esffinal3.position.z +=step3;
+cubo.position.z += step3;
 
 
 
@@ -625,10 +762,62 @@ if ((map2[i][j]) === 1) {
 
 
 
+
+
+//N I V E L    3
+for (var i = 0; i < 10; i++) {
+		for (var j = 0; j < 10; j++) {
+			
+if ((map3[i][j]) === 1) {
+				
+
+				if ( (cubo.position.x === offset3+i*tcubo - 12) && (cubo.position.y < j*tcubo+11 && cubo.position.y > j*tcubo-11) ) {cubo.position.x = offset3+i*tcubo - 13}
+				if ( (cubo.position.x === offset3+i*tcubo + 12) && (cubo.position.y < j*tcubo+11 && cubo.position.y > j*tcubo-11) ) {cubo.position.x = offset3+i*tcubo + 13}
+
+
+				if ( (cubo.position.y === j*tcubo - 12) && (cubo.position.x  < offset3+i*tcubo+11 && cubo.position.x >offset3+ i*tcubo-11) ) {cubo.position.y = j*tcubo - 13}
+				if ( (cubo.position.y === j*tcubo + 12) && (cubo.position.x  < offset3+i*tcubo+11 && cubo.position.x >offset3+ i*tcubo-11) ) {cubo.position.y = j*tcubo + 13}
+
+				
+				
+			}
+			
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
 // A P A R I C I O N E S 
 
 //NIVEL 1
-	if ( (cubo.position.x > 10) && (cubo.position.x < 30) && (cubo.position.y > 190) ) {cubo.position.x = 300; cubo.position.y=20;}
+	if ( (cubo.position.x > 10) && (cubo.position.x < 30) && (cubo.position.y > 190) && (step > 0) ) {cubo.position.x = 300; cubo.position.y=20;}
+
+
+
+
+//NIVEL 2
+	if ( (cubo.position.x > offset2+90) && (cubo.position.x < offset2+90+40) && (cubo.position.y > 190) && (step2 > 0) ) {cubo.position.x = offset3+20; cubo.position.y=20;}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
