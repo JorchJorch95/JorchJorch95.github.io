@@ -341,7 +341,7 @@ LataFForma.merge(Pie2Malla.geometry, Pie2Malla.matrix);
 
 
 
-var materialLata = new THREE.MeshNormalMaterial({map:coca});
+var materialLata = new THREE.MeshStandardMaterial({map:coca});
 
 Lata = new THREE.Mesh(LataFForma, materialLata);
 
@@ -413,7 +413,7 @@ figura.lineTo(0, -3/sstar);
 
 var starg = new THREE.ExtrudeGeometry( figura,{amount:1} );
 
-var materialstar = new THREE.MeshNormalMaterial();
+var materialstar = new THREE.MeshStandardMaterial({color:0xffff00});
 star = new THREE.Mesh( starg, materialstar );
 star.rotateY( Math.PI/12 );
 star.castShadow = true;
@@ -487,8 +487,8 @@ step3=0;
 	var P = new THREE.Mesh( pisog, materialpiso );
 	escena.add( P );
 	P.position.z=0;
-	P.position.x=100;
-	P.position.y=100;
+	P.position.x=100-10;
+	P.position.y=100-10;
 	P.receiveShadow = true;
 
 
@@ -501,8 +501,8 @@ step3=0;
 	var P2 = new THREE.Mesh( piso2g, materialpiso2 );
 	escena.add( P2 );
 	P2.position.z=0;
-	P2.position.x=offset2+100;
-	P2.position.y=100;
+	P2.position.x=offset2+100-10;
+	P2.position.y=100-10;
 	P2.receiveShadow = true;
 	
 
@@ -514,8 +514,8 @@ step3=0;
 	var P3 = new THREE.Mesh( piso3g, materialpiso3 );
 	escena.add( P3 );
 	P3.position.z=0;
-	P3.position.x=offset3+100;
-	P3.position.y=100;
+	P3.position.x=offset3+100-10;
+	P3.position.y=100-10;
 	P3.receiveShadow = true;
 	
 
