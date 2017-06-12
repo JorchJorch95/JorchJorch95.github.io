@@ -285,7 +285,7 @@ if ((map3[i][j]) === 1) {
 				
 				var cuboMaterial = new THREE.MeshStandardMaterial( { map:cubito } );
 				
-				var cuboGeometria = new THREE.CubeGeometry(2.5, 2.5, 2.5);
+				var cuboGeometria = new THREE.CubeGeometry(5, 5, 5);
 
 				cubo = new THREE.Mesh(cuboGeometria, cuboMaterial);
 				cubo.castShadow = true;
