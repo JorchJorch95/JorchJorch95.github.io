@@ -1,7 +1,7 @@
 var textura1 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/brick_bump.jpg');
 var textura2 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/brick_diffuse.jpg');
 var textura3 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/brick_roughness.jpg');
-var textura4 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/roughness_map.jpg.jpg');
+var textura4 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/roughness_map.jpg');
 var textura5 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/transition3.png');
 var logoupiita = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/logo_upiita.png');
 var coca = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/cocacola.png');
