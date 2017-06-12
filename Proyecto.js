@@ -1,11 +1,16 @@
 var textura1 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/brick_bump.jpg');
 var textura2 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/brick_diffuse.jpg');
 var textura3 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/brick_roughness.jpg');
-var textura4 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/lensflare2.jpg');
+var textura4 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/roughness_map.jpg.jpg');
 var textura5 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/transition3.png');
 var logoupiita = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/logo_upiita.png');
 var coca = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/cocacola.png');
 var textura6 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/UV_Grid_Sm.jpg');
+var pepsi = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/pepsi.jpg');
+var dr = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/Dr_Pepper_modern.svg.png');
+var bola8 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/bola8.jpg');
+var cubito = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/mariobloque1.jpg');
+var jarritos = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/jarritos.png');
 
 
 var TECLA = { AVPAG:false, REPAG:false, ARRIBA:false, ABAJO:false, IZQUIERDA:false, DERECHA:false, F:false, K:false,I:false,L:false,J:false, Q:false,A:false,W:false,S:false,E:false,D:false,Z:false,X:false,T1:false,T2:false,T3:false,T4:false,C:false,V:false };
@@ -278,7 +283,7 @@ if ((map3[i][j]) === 1) {
 			
 				//Cubo
 				
-				var cuboMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
+				var cuboMaterial = new THREE.MeshStandardMaterial( { map:cubito } );
 				
 				var cuboGeometria = new THREE.CubeGeometry(2.5, 2.5, 2.5);
 
@@ -374,7 +379,7 @@ LataBB.rotateX(Math.PI/2);
 
 
 //ESFERA				
-var esferaMaterial = new THREE.MeshStandardMaterial( { color: 0xff00ff } );
+var esferaMaterial = new THREE.MeshStandardMaterial( { map:bola8 } );
 				
 var esferaGeometria = new THREE.SphereGeometry(2, 32, 32);
 
@@ -425,7 +430,7 @@ star.visible = false;
 
 
 // E S F E R A     F I N A L
-esffinal=new THREE.Mesh(new THREE.SphereGeometry(5), new THREE.MeshNormalMaterial());
+esffinal=new THREE.Mesh(new THREE.SphereGeometry(5), new THREE.MeshStandardMaterial({map:pepsi}));
 escena.add(esffinal);
 esffinal.position.set(20,180,10);
 
@@ -442,7 +447,7 @@ step=0;
 
 
 // E S F E R A     F I N A L   N I V E L   2
-esffinal2=new THREE.Mesh(new THREE.SphereGeometry(5), new THREE.MeshNormalMaterial());
+esffinal2=new THREE.Mesh(new THREE.SphereGeometry(5), new THREE.MeshStandardMaterial({dr}));
 escena.add(esffinal2);
 esffinal2.position.set(offset2+100,180,10);
 
@@ -459,7 +464,7 @@ step2=0;
 
 
 // E S F E R A     F I N A L   N I V E L   3
-esffinal3=new THREE.Mesh(new THREE.SphereGeometry(5), new THREE.MeshNormalMaterial());
+esffinal3=new THREE.Mesh(new THREE.SphereGeometry(5), new THREE.MeshStandardMaterial({map:jarritos}));
 escena.add(esffinal3);
 esffinal3.position.set(offset3,100,10);
 
