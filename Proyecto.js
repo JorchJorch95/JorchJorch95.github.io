@@ -1,6 +1,9 @@
 var textura1 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/brick_bump.jpg');
 var textura2 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/brick_diffuse.jpg');
 var textura3 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/brick_roughness.jpg');
+var textura4 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/lensflare2.jpg');
+var textura5 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/transition3.png');
+
 
 
 
@@ -271,25 +274,7 @@ if ((map3[i][j]) === 1) {
 
 
 
-
-
-var axisHelper = new THREE.AxisHelper( 5 );
-escena.add( axisHelper );
-axisHelper.position.set(-5,-5,5);
-
-
-
-
-
-
-
-
-
-
-
-
-
-				
+			
 				//Cubo
 				
 				var cuboMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
@@ -497,7 +482,7 @@ step3=0;
 
 //PISO
 	var pisog = new THREE.BoxBufferGeometry(200,200,1);
-	var materialpiso = new THREE.MeshStandardMaterial( {color: 0xffffff} );
+	var materialpiso = new THREE.MeshStandardMaterial( {map:textura4} );
 	var P = new THREE.Mesh( pisog, materialpiso );
 	escena.add( P );
 	P.position.z=0;
@@ -511,7 +496,7 @@ step3=0;
 
 //PISO 2
 	var piso2g = new THREE.BoxBufferGeometry(200,200,1);
-	var materialpiso2 = new THREE.MeshStandardMaterial( {color: 0x0000ff} );
+	var materialpiso2 = new THREE.MeshStandardMaterial( {map: textura5} );
 	var P2 = new THREE.Mesh( piso2g, materialpiso2 );
 	escena.add( P2 );
 	P2.position.z=0;
