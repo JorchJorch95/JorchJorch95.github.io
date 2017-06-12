@@ -3,8 +3,9 @@ var textura2 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/
 var textura3 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/brick_roughness.jpg');
 var textura4 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/lensflare2.jpg');
 var textura5 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/transition3.png');
-
-
+var logoupiita = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/logo_upiita.png');
+var coca = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/cocacola.png');
+var textura6 = new THREE.ImageUtils.loadTexture('https://JorchJorch95.github.io/UV_Grid_Sm.jpg');
 
 
 var TECLA = { AVPAG:false, REPAG:false, ARRIBA:false, ABAJO:false, IZQUIERDA:false, DERECHA:false, F:false, K:false,I:false,L:false,J:false, Q:false,A:false,W:false,S:false,E:false,D:false,Z:false,X:false,T1:false,T2:false,T3:false,T4:false,C:false,V:false };
@@ -340,9 +341,9 @@ LataFForma.merge(Pie2Malla.geometry, Pie2Malla.matrix);
 
 
 
-var material = new THREE.MeshNormalMaterial();
+var materialLata = new THREE.MeshNormalMaterial({map:coca});
 
-Lata = new THREE.Mesh(LataFForma, material);
+Lata = new THREE.Mesh(LataFForma, materialLata);
 
 Lata.castShadow = true;
 
@@ -509,7 +510,7 @@ step3=0;
 
 //PISO 3
 	var piso3g = new THREE.BoxBufferGeometry(200,200,1);
-	var materialpiso3 = new THREE.MeshStandardMaterial( {color: 0x000099} );
+	var materialpiso3 = new THREE.MeshStandardMaterial( {map: textura6} );
 	var P3 = new THREE.Mesh( piso3g, materialpiso3 );
 	escena.add( P3 );
 	P3.position.z=0;
