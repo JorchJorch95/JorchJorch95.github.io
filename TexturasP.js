@@ -81,7 +81,7 @@ luz1.position.set(
 	100	 // Posición en eje Z
 );
 
-var luz2 = new THREE.PointLight(0x4499ff); // Azulado
+var luz2 = new THREE.PointLight(0xffffff); // 
 luz2.position.set(
 	-100, // Posición en eje X
 	100, // Posición en eje Y
