@@ -30,7 +30,7 @@ var geometriaCubo = new THREE.CubeGeometry(
 );
 
 // Creamos una apariencia (de lila claro)
-var aparienciaLila = new THREE.MeshLambertMaterial({map:textura3});
+var aparienciaLila = new THREE.MeshStandardMaterial({map:textura3});
 
 // Generamos el polígino y le aplicamos la apariencia
 var cubo = new THREE.Mesh(geometriaCubo, aparienciaLila);
@@ -40,12 +40,12 @@ escena.add(cubo);
 
 
 
-var mat2 = new THREE.MeshLambertMaterial({map:textura1});
+var mat2 = new THREE.MeshStandardMaterial({map:textura1});
 var cubo2 = new THREE.Mesh(geometriaCubo, mat2);
 escena.add(cubo2);
 cubo2.position.x=200;
 
-var mat3 = new THREE.MeshLambertMaterial({map:textura2});
+var mat3 = new THREE.MeshStandardMaterial({map:textura2});
 var cubo3 = new THREE.Mesh(geometriaCubo, mat3);
 escena.add(cubo3);
 cubo3.position.x=-200;
