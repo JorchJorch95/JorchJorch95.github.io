@@ -74,7 +74,7 @@ camara.lookAt(cubo.position);
 escena.add(camara);
 
 // Creamos una par de focos de luz
-var luz1 = new THREE.PointLight(0xff0044); // Rojizo
+var luz1 = new THREE.PointLight(0xffffff); 
 luz1.position.set(
 	120, // Posición en eje X
 	260, // Posición en eje Y
