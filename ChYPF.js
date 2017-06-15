@@ -604,7 +604,7 @@ function Jugador(size, x=0, y=0,z=0,m){
 Agent.call(this,x,y);
 
 this.step=0;
-this.step2=0.0;
+this.step2=0.2;
 this.colision=0;
 this.colision2=0;
 this.size=size;
@@ -702,19 +702,19 @@ function init(){
 	mesh = new Jugador(1,-10,1,-6,{map:m1});
 	scene.add(mesh);
 
-	PER1 = new P1(10,-2,2,2,0,{map: m1});
+	PER1 = new P1(10,-2,2,2,1,{map: m1});
 	scene.add(PER1);
 
-	PER2 = new Cisne(1,-25,2,50,0,{map:m2});
+	PER2 = new Cisne(1,-25,2,50,2,{map:m2});
 	scene.add(PER2);
 
-	guerre = new Guerrero(10,-25,2,25,0,{map:metal});
+	guerre = new Guerrero(10,-25,2,25,1,{map:metal});
 	scene.add(guerre);
 	
-	estre = new Estrella(10,-1,2,30,0,{map:canasta});
+	estre = new Estrella(10,-1,2,30,2,{map:canasta});
 	scene.add(estre);
 
-	warri =  new Warrior(10,-20,2,10,0,{map:m3});
+	warri =  new Warrior(10,-20,2,10,1,{map:m3});
 	scene.add(warri);
 	
 
@@ -860,12 +860,12 @@ function animate(){
 	mesh.rotation.x += 0.01;
 	mesh.rotation.y += 0.02;
 	
-	if(keyboard[87]){ // W key
-		mesh.position.z +=  player.speed;
-	}
-	if(keyboard[83]){ // S key
-		mesh.position.z -= player.speed;
-	}
+	//if(keyboard[87]){ // W key
+	//	mesh.position.z +=  player.speed;
+	//}
+	//if(keyboard[83]){ // S key
+	//	mesh.position.z -= player.speed;
+	/}
 	if(keyboard[65]){ // A key
 		mesh.position.x += player.speed;
 		
