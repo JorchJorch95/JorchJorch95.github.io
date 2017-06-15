@@ -922,7 +922,7 @@ if ((map3[i][j]) === 1) {
 
 
 //ANUNCIO FINAL
-	if (cubo.position.z >300 ) {alert('HAS COMPLETADO LOS 3 NIVELES, GRACIAS POR JUGAR ;)')}
+	if (cubo.position.z >700 ) {alert('HAS COMPLETADO LOS 3 NIVELES, GRACIAS POR JUGAR ;)')}
 
 
 // A P A R I C I O N E S 
