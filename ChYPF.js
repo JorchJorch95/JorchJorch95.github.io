@@ -78,7 +78,7 @@ this.children[i].act(this);
 
 
 
-function Pelota(r, x=0, y=0,z=0){
+function Pelota(r, x=0, y=0,z=0,m){
 Agent.call(this,x,y);
 
 this.step=0;
@@ -94,7 +94,7 @@ this.visible = true;
 
 
 
-var variable = new THREE.Mesh(new THREE.SphereGeometry(r), new THREE.MeshStandardMaterial({color:0xff00ff}));
+var variable = new THREE.Mesh(new THREE.SphereGeometry(r), new THREE.MeshStandardMaterial(m));
 variable.castShadow = true;
 this.add(variable);
 
@@ -699,7 +699,7 @@ function init(){
 
 
 
-	mesh = new Jugador(1,-10,1,-6);
+	mesh = new Jugador(1,-10,1,-6,{map:m1});
 	scene.add(mesh);
 
 	PER1 = new P1(10,-2,2,2,0,{map: m1});
@@ -724,19 +724,19 @@ for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 20; j++) {
 			
 if ((enemies[i][j]) === 1) {
-			scene.add( new Pelota(1,i*-5,0,j*5));
+			scene.add( new Pelota(1,i*-5,0,j*5,{map:m1}));
 			}
 			
 if ((enemies[i][j]) === 2) {
-			scene.add( new Pelota(1,i*-5,2.5,j*5));
+			scene.add( new Pelota(1,i*-5,2.5,j*5,{map:m2}));
 			}
 
 if ((enemies[i][j]) === 3) {
-			scene.add( new Pelota(1,i*-5,5,j*5));
+			scene.add( new Pelota(1,i*-5,5,j*5,{map:metal}));
 			}
 
 if ((enemies[i][j]) === 4) {
-			scene.add( new Pelota(1,i*-5,7.5,j*5));
+			scene.add( new Pelota(1,i*-5,7.5,j*5,{map:canasta}));
 			}
 		}
 	}
@@ -769,7 +769,7 @@ var axisHelper = new THREE.AxisHelper( 5 );
 	meshFloor = new THREE.Mesh(
 		new THREE.PlaneGeometry(100,100),
 		
-		new THREE.MeshPhongMaterial({color:0xffffff})
+		new THREE.MeshPhongMaterial({map:metal})
 		
 	);
 	meshFloor.position.y = -2;
