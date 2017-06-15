@@ -865,7 +865,7 @@ function animate(){
 	//}
 	//if(keyboard[83]){ // S key
 	//	mesh.position.z -= player.speed;
-	/}
+	//}
 	if(keyboard[65]){ // A key
 		mesh.position.x += player.speed;
 		
